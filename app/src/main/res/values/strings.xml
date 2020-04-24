@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">InClass14</string>
+    <string name="API_KEY_MAPS">AIzaSyCHkr_cjWDVYAtxF2MHeYgIY2LIAHTFM6s</string>
+    <string name="add_trip">Add Trip</string>
+    <string name="add_to_trip">Add to trip</string>
+    <string name="show_on_map">Show on map</string>
+    <string name="place_item_image">place item image</string>
+    <string name="delete_place_item">delete place item</string>
+</resources>
