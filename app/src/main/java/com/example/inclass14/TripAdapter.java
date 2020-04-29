@@ -1,7 +1,5 @@
 package com.example.inclass14;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> implements OnPlaceItemListener {
+class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
 
     private ArrayList<Trip> mData;
     private OnTripItemListener mOnTripItemListener;
@@ -38,7 +37,7 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> implement
         Trip trip = mData.get(position);
 
         holder.tv_trip_title.setText(trip.trip_title);
-        holder.tv_location.setText(trip.Location);
+        holder.tv_location.setText(trip.location);
 
         holder.iv_map.setTag(trip);
         holder.iv_add_to_trip.setTag(trip);
@@ -47,8 +46,11 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> implement
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.itemView.getContext());
 
+        holder.recycler_places.addItemDecoration(new DividerItemDecoration(holder.recycler_places.getContext(),
+                linearLayoutManager.getOrientation()));
+
         holder.recycler_places.setLayoutManager(linearLayoutManager);
-        holder.recycler_places.setAdapter(new PlaceAdapter(trip.place, this));
+        holder.recycler_places.setAdapter(new PlaceAdapter(trip.place));
 
     }
 
@@ -57,10 +59,6 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> implement
         return mData.size();
     }
 
-    @Override
-    public void onItemClick(int adapterPosition) {
-        Log.d("asdf", "in trip adapter and clicked: " + adapterPosition);
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -83,7 +81,7 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> implement
 
         @Override
         public void onClick(View v) {
-            onTripItemListener.onItemClick(getLayoutPosition());
+            onTripItemListener.onTripItemClick(getLayoutPosition());
         }
 
     }

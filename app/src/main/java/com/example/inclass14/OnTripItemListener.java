@@ -1,5 +1,5 @@
 package com.example.inclass14;
 
 interface OnTripItemListener {
-    void onItemClick(int adapterPosition);
+    void onTripItemClick(int adapterPosition);
 }

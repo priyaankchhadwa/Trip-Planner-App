@@ -1,22 +1,29 @@
 package com.example.inclass14;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.ArrayList;
 
 class Trip {
-    String trip_title, Location;
-    ArrayList<Place> place;
+    String id;
+    String trip_title;
+    String location;
+    GeoPoint latlng_city;
+    String place_id;
+    ArrayList<Place> place = new ArrayList<>();
 
-    public Trip(String trip_title, String location, ArrayList<Place> place) {
-        this.trip_title = trip_title;
-        Location = location;
-        this.place = place;
+    public Trip() {
+
     }
 
     @Override
     public String toString() {
         return "Trip{" +
-                "trip_title='" + trip_title + '\'' +
-                ", Location='" + Location + '\'' +
+                "id='" + id + '\'' +
+                ", trip_title='" + trip_title + '\'' +
+                ", location='" + location + '\'' +
+                ", latlng_city=" + latlng_city +
+                ", place_id='" + place_id + '\'' +
                 ", place=" + place +
                 '}';
     }

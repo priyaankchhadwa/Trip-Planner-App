@@ -14,11 +14,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Enter Trip Name"
+        android:hint="@string/enter_trip_name"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/tv_city_search"
@@ -28,11 +29,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Search for a city"
+        android:hint="@string/search_for_a_city"
         android:inputType="textShortMessage"
         app:layout_constraintEnd_toStartOf="@+id/btn_search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trip_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trip_name"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btn_search"
@@ -40,7 +42,6 @@
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:text="@android:string/search_go"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_city_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_city_search" />
 
@@ -53,10 +54,9 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bkgrnd"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_trip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_city_search">
 
@@ -64,15 +64,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ListView
+                android:id="@+id/lv_search_city"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_add_trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="Button"
+        android:text="@string/add_trip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

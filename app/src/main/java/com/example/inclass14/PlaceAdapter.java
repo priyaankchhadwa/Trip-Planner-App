@@ -16,18 +16,16 @@ import java.util.ArrayList;
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
 
     private ArrayList<Place> mData;
-    private OnPlaceItemListener mOnPlaceItemListener;
 
-    public PlaceAdapter(ArrayList<Place> mData, OnPlaceItemListener mOnPlaceItemListener) {
+    public PlaceAdapter(ArrayList<Place> mData) {
         this.mData = mData;
-        this.mOnPlaceItemListener = mOnPlaceItemListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.place_item, parent, false);
-        return new PlaceAdapter.ViewHolder(view, mOnPlaceItemListener);
+        return new PlaceAdapter.ViewHolder(view);
     }
 
     @Override
@@ -50,26 +48,16 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_place_name;
         ImageView iv_place_img, iv_delete;
 
-        private OnPlaceItemListener onPlaceItemListener;
-
-        public ViewHolder(@NonNull final View itemView, OnPlaceItemListener onPlaceItemListener) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             tv_place_name = itemView.findViewById(R.id.tv_place_name);
             iv_place_img = itemView.findViewById(R.id.iv_place_img);
             iv_delete = itemView.findViewById(R.id.iv_delete);
-            this.onPlaceItemListener = onPlaceItemListener;
-
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            onPlaceItemListener.onItemClick(getLayoutPosition());
         }
 
     }
