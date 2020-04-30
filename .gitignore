@@ -7,6 +7,9 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/app/google-services.json
+**google_maps_api.xml
+**/google_maps_api.xml
 .DS_Store
 /build
 /captures

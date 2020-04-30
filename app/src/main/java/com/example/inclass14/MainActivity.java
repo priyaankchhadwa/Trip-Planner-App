@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.LatLng;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
                                     break;
                             }
                         }
+                        mAdapter.notifyDataSetChanged();
 
                     }
                 });
@@ -186,11 +189,19 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
 
     public void showTripMap(View view) {
         Log.d("asdf", "trip map this: " + view.getTag());
+        Intent i = new Intent(this, MapsActivity.class);
+        i.putExtra("trip", (Trip) view.getTag());
+        startActivity(i);
+
     }
 
     public void addPlaceItem(View view) {
         Log.d("asdf", "add trip this: " + view.getTag());
-        Intent intent = new Intent(MainActivity.this, AddTripActivity.class);
+        Trip trip = (Trip) view.getTag();
+        Intent intent = new Intent(MainActivity.this, AddPlaceActivity.class);
+        intent.putExtra("trip_ref",trip.id);
+        intent.putExtra("lat", trip.latlng_city.getLatitude());
+        intent.putExtra("lng", trip.latlng_city.getLongitude());
         startActivity(intent);
     }
 
