@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
         Log.d("asdf", "trip map this: " + view.getTag());
         Intent i = new Intent(this, MapsActivity.class);
         i.putExtra("trip", (Trip) view.getTag());
+        i.putParcelableArrayListExtra("places", ((Trip) view.getTag()).place);
         startActivity(i);
 
     }

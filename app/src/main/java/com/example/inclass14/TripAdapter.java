@@ -83,15 +83,25 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
                             if (doc.getType() == ADDED) {
                                 Log.d("asdf", "adding place from inside trip adapter: " + doc.getDocument().getData());
                                 p = doc.getDocument().toObject(Place.class);
-                                trip.place.add(p);
-                                holder.recycler_places_adater.notifyItemInserted(trip.place.size() - 1);
-                                //                                Log.d("asdf", "ajhsdvjasvd" + p);
+                                if (valPlaces(trip.place, p)) {
+                                    trip.place.add(p);
+                                }
                             }
                         }
+                        holder.recycler_places_adater.notifyDataSetChanged();
 
                     }
                 });
 
+    }
+
+    private boolean valPlaces(ArrayList<Place> places, Place p) {
+        for (Place pi : places) {
+            if (pi.place_id.equals(p.place_id)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
