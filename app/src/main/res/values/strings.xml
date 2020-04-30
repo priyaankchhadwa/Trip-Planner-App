@@ -8,4 +8,5 @@
     <string name="delete_place_item">delete place item</string>
     <string name="enter_trip_name">Enter Trip Name</string>
     <string name="search_for_a_city">Search for a city</string>
+    <string name="title_activity_maps">Trip Map</string>
 </resources>
