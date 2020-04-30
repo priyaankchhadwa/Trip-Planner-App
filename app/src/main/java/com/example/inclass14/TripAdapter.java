@@ -64,33 +64,34 @@ class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
         holder.recycler_places.setLayoutManager(linearLayoutManager);
         holder.recycler_places.setAdapter(holder.recycler_places_adater);
 
-        Log.d("asdf", "trip id for trip: " + trip + " and then id: " + trip.id);
+        Log.d("asdf", "trip id for trip: " + trip + " and then id: " + trip.place);
 
 
-//        db.collection("trips_test")
-//                .document(trip.id)
-//                .collection("places")
-//                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-//                        if (e != null) {
-//                            Log.d("", "Error : " + e.getMessage());
-//                        }
-//
-//                        for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-//                            Place p;
-//                            if (doc.getType() == ADDED) {
-//                                Log.d("asdf","adding place"+ doc.getDocument().getId());
-//                                p = doc.getDocument().toObject(Place.class);
-//                                trip.place.add(p);
-//                                Log.d("asdf", "ajhsdvjasvd" + p);
-//                            }
-//                        }
-//
-//                    }
-//                });
-//
-//        holder.recycler_places_adater.notifyDataSetChanged();
+        Log.d("asdf", "inside trip adapter to update inner recycler!!");
+        db.collection("trips_test")
+                .document(trip.id)
+                .collection("places")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.d("", "Error : " + e.getMessage());
+                        }
+
+                        for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                            Place p;
+                            if (doc.getType() == ADDED) {
+                                Log.d("asdf", "adding place from inside trip adapter: " + doc.getDocument().getData());
+                                p = doc.getDocument().toObject(Place.class);
+                                trip.place.add(p);
+                                holder.recycler_places_adater.notifyItemInserted(trip.place.size() - 1);
+                                //                                Log.d("asdf", "ajhsdvjasvd" + p);
+                            }
+                        }
+
+                    }
+                });
+
     }
 
     @Override

@@ -93,19 +93,19 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
                     public void onEvent(@Nullable QuerySnapshot snapshots,
                                         @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
-                            Log.w("demo", "listen:error", e);
+                            Log.w("asdf", "listen:error", e);
                             return;
                         }
 
                         for (DocumentChange dc : snapshots.getDocumentChanges()) {
                             switch (dc.getType()) {
                                 case ADDED:
-                                    Log.d("demo", "New contact: " + dc.getDocument().getData());
+                                    Log.d("asdf", "New contact: " + dc.getDocument().getData());
 
                                     HashMap document = (HashMap) dc.getDocument().getData();
 
                                     final Trip trip = new Trip();
-                                    trip.id = (String) document.get("id");
+                                    trip.id = dc.getDocument().getId();
                                     trip.trip_title = (String) document.get("trip_title");
                                     trip.location = (String) document.get("location");
                                     trip.latlng_city = (GeoPoint) document.get("latlng_city");
@@ -116,11 +116,12 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
 
                                     break;
                                 case MODIFIED:
-                                    Log.d("demo", "Modified contact: " + dc.getDocument().getData());
+                                    Log.d("asdf", "Modified contact: " + dc.getDocument().getData());
                                     mAdapter.notifyDataSetChanged();
                                     break;
                                 case REMOVED:
-                                    Log.d("demo", "Removed contact: " + dc.getDocument().getData());
+                                    Log.d("asdf", "Removed contact: " + dc.getDocument().getData());
+                                    mAdapter.notifyDataSetChanged();
                                     break;
                             }
                         }
@@ -128,56 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
 
                     }
                 });
-
-//        db.collection("trips_test")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//                                Log.d("asdf", document.getId() + " => " + document.getData());
-//
-//                                final Trip trip = new Trip();
-//                                trip.id = document.getId();
-//                                trip.trip_title = document.getString("trip_title");
-//                                trip.location = document.getString("location");
-//                                trip.latlng_city = document.getGeoPoint("latlng_city");
-//                                trip.place_id = document.getString("place_id");
-//
-//                                db.collection("trips").document(trip.id).collection("places")
-//                                        .get()
-//                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<QuerySnapshot> task1) {
-//
-//                                                Log.d("asdf", "onComplete: of inner get ");
-//
-//                                                for (QueryDocumentSnapshot dc : task1.getResult()) {
-//                                                    Log.d("asdf", dc.getId() + " => " + dc.getData());
-//                                                    Place p = new Place();
-//                                                    p.id = dc.getId();
-//                                                    p.img_url = dc.getString("img_url");
-//                                                    p.name = dc.getString("name");
-//                                                    GeoPoint geoPoint = dc.getGeoPoint("latlng");
-//                                                    p.latlng[0] = geoPoint.getLatitude();
-//                                                    p.latlng[1] = geoPoint.getLongitude();
-//                                                    Log.d("asdf", "onComplete: inner get " + p);
-//                                                    trip.place.add(p);
-//                                                }
-//                                            }
-//                                        });
-//                                data.add(trip);
-//                                mAdapter.notifyItemInserted(data.size() - 1);
-//                            }
-//                        } else {
-//                            Log.w("asdf", "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
-//        mAdapter.notifyDataSetChanged();
-
     }
 
     public void deletePlace(View view) {

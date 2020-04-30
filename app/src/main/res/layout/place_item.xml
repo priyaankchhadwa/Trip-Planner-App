@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/iv_place_img"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -23,22 +23,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_place_img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_delete"
         app:layout_constraintStart_toEndOf="@+id/iv_place_img"
-        app:layout_constraintTop_toTopOf="@+id/iv_place_img" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/delete_place_item"
         android:onClick="deletePlace"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_place_name"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_place_name"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

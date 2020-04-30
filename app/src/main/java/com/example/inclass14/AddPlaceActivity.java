@@ -82,7 +82,7 @@ public class AddPlaceActivity extends AppCompatActivity implements AddPlaceListe
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 parseJsonForNearBy(response.body().string());
-                Log.d("asdf", "onResponse: something is wrong?");
+//                Log.d("asdf", "onResponse: something is wrong?");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -135,7 +135,7 @@ public class AddPlaceActivity extends AppCompatActivity implements AddPlaceListe
                 p.img_url = obj.getString("icon");
                 p.name = obj.getString("name");
                 p.trip_id = this.trip_ref;
-                Log.d("asdf", p + "");
+//                Log.d("asdf", p + "");
                 data.add(p);
 
 

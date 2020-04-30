@@ -43,7 +43,7 @@ class Place implements Parcelable {
     @Override
     public String toString() {
         return "Place{" +
-                "id='" + trip_id + '\'' +
+                "trip_id='" + trip_id + '\'' +
                 ", place_id='" + place_id + '\'' +
                 ", name='" + name + '\'' +
                 ", img_url='" + img_url + '\'' +
