@@ -16,9 +16,13 @@ import java.util.ArrayList;
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
 
     private ArrayList<Place> mData;
+    TripAdapter ctx;
+    int trip_idx;
 
-    public PlaceAdapter(ArrayList<Place> mData) {
+    public PlaceAdapter(ArrayList<Place> mData, TripAdapter tripAdapter, int trip_idx) {
         this.mData = mData;
+        this.ctx = tripAdapter;
+        this.trip_idx = trip_idx;
     }
 
     @NonNull
@@ -29,11 +33,17 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Place place = mData.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final Place place = mData.get(position);
 
         holder.tv_place_name.setText(place.name);
-        holder.iv_delete.setTag(place);
+
+        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ctx.deletePlace(trip_idx, position, place.trip_id, place.place_id);
+            }
+        });
 
         Picasso.get()
                 .load(!place.img_url.equals("")? place.img_url: "http://")
@@ -61,5 +71,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
         }
 
     }
-
+    interface deletePlaceFromTrip{
+        void deletePlace(int parent_index,int place_position, String trip_id, String place_id);
+    }
 }

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
 
         layoutManager = new LinearLayoutManager(this);
         recycler_trip.setLayoutManager(layoutManager);
-        mAdapter = new TripAdapter(data, this);
+        mAdapter = new TripAdapter(data, this, getApplicationContext());
         recycler_trip.setAdapter(mAdapter);
 
 
@@ -132,10 +133,26 @@ public class MainActivity extends AppCompatActivity implements OnTripItemListene
     }
 
     public void deletePlace(View view) {
-        Log.d("asdf", "delete this: " + view.getTag());
+        Log.d("asdf", "delete this obj: " + view.getTag());
         Place place = (Place) view.getTag();
+        db.collection("trips_test")
+                .document(place.trip_id)
+                .collection("places")
+                .document(place.place_id)
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(MainActivity.this, "Place deleted", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Place is not deleted", Toast.LENGTH_SHORT).show();
+                        }
 
-//        db.collection("trips").document(place.trio)
+                    }
+                });
+
+//        trip.get(parent_index).places.remove(pos);
     }
 
     public void showTripMap(View view) {
